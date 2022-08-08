@@ -129,5 +129,147 @@ export default {
 ==Tooltip配置项==
 
 ```vue
+<template>
+  <div id="myDiv" ref="myChart"></div>
+</template>
+
+<script>
+import * as echarts from "echarts";
+export default {
+  mounted() {
+    let myEcharts = echarts.init(this.$refs.myChart);
+    myEcharts.setOption({
+      title: {
+        text: "我是标题",
+      },
+      xAxis: {
+        data: ["苹果", "西瓜", "香蕉", "橘子"],
+      },
+      tooltip: {
+        //触发类型：axis坐标轴触发；item图形触发
+        trigger: "axis",
+        //坐标轴指示器
+        axisPointer: {
+          type: "shadow", //默认line，显示一个实线；shadow阴影效果；cross十字准星
+        },
+        //显示悬浮框，默认true
+        // showContent: false,
+        //悬浮框样式
+        backgroundColor: "pink",
+        borderColor: "red",
+        borderWidth: 2,
+        textStyle: {
+          color: "yellow",
+        },
+        //自定义提示框信息
+        formatter(params) {
+          for(let i = 0; i < params.length; i++) {
+            return "名字："+params[i].name+"--价格："+params[i].data.value+"--采摘日期："+params[i].data.date
+          }
+        },
+      },
+      yAxis: {},
+      series: [
+        {
+          name: "水果",
+          type: "bar",
+          data: [
+            {
+              value: 5,
+              date: "2022年8月8日",
+            },
+            {
+              value: 6,
+              date: "2022年8月9日",
+            },
+            {
+              value: 8,
+              date: "2022年8月10日",
+            },
+            {
+              value: 10,
+              date: "2022年8月12日",
+            },
+          ],
+        },
+      ],
+    });
+  },
+};
+</script>
+
+<style>
+#myDiv {
+  width: 500px;
+  height: 500px;
+  border: 1px solid red;
+}
+</style>
+```
+
+
+
+==legend配置项==
+
+```vue
+<template>
+    <div id="myDiv" ref="myChart"></div>
+</template>
+
+<script>
+import * as echarts from 'echarts'
+
+export default {
+    mounted() {
+        let myEcharts = echarts.init(this.$refs.myChart);
+        myEcharts.setOption({
+            title: {
+                text: '主标题'
+            },
+            tooltip: {},
+            legend: {
+                show: true, //设置图例的开启或者关闭
+                // icon: 'circle', //设置图例形状 圆形
+                top: '10%', //设置位置
+                //图例宽高
+                itemWidth: 10,
+                itemHeight: 20,
+                //设置图例文本的样式
+                textStyle: {
+                    color: "red",
+                    fontSize: 30,
+                    backgroundColor: "yellow"
+                }
+            },
+            xAxis: {
+                data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+            },
+            yAxis: {},
+            series: [{
+                name: '销量',
+                type: 'bar',
+                data: [5, 20, 36, 10, 10, 20]
+            }]
+        })
+    }
+}
+</script>
+
+<style>
+#myDiv {
+    width: 500px;
+    height: 500px;
+    border: 1px solid red;
+}
+</style>
+```
+
+
+
+## 柱状图
+
+==基本设置==
+
+```vue
 ```
 

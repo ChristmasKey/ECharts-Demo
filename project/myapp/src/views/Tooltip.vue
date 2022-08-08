@@ -32,9 +32,8 @@ export default {
         },
         //自定义提示框信息
         formatter(params) {
-          console.log(params);
           for(let i = 0; i < params.length; i++) {
-            //TODO
+            return "名字："+params[i].name+"--价格："+params[i].data.value+"--采摘日期："+params[i].data.date
           }
         },
       },
@@ -50,15 +49,15 @@ export default {
             },
             {
               value: 6,
-              date: "2022年8月8日",
+              date: "2022年8月9日",
             },
             {
               value: 8,
-              date: "2022年8月8日",
+              date: "2022年8月10日",
             },
             {
               value: 10,
-              date: "2022年8月8日",
+              date: "2022年8月12日",
             },
           ],
         },

@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import About from '@/views/About'
 import Home from '@/views/Home'
 import Tooltip from '@/views/Tooltip'
+import Legend from '@/views/Legend'
 
 export default new VueRouter({
     routes: [
@@ -17,6 +18,10 @@ export default new VueRouter({
         {
             path: '/tooltip',
             component: Tooltip
+        },
+        {
+            path: '/legend',
+            component: Legend
         }
     ]
 })
