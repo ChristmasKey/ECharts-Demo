@@ -4,6 +4,8 @@ import About from '@/views/About'
 import Home from '@/views/Home'
 import Tooltip from '@/views/Tooltip'
 import Legend from '@/views/Legend'
+import BarGraph from '@/views/BarGraph'
+import HorizontalBar from '@/views/HorizontalBar'
 
 export default new VueRouter({
     routes: [
@@ -22,6 +24,14 @@ export default new VueRouter({
         {
             path: '/legend',
             component: Legend
+        },
+        {
+            path: '/barGraph',
+            component: BarGraph
+        },
+        {
+            path: '/horizontalBar',
+            component: HorizontalBar
         }
     ]
 })

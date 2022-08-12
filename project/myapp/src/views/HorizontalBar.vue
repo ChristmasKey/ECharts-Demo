@@ -7,35 +7,38 @@ import * as echarts from "echarts";
 
 export default {
   mounted() {
-    // 1.初始化
     let myEcharts = echarts.init(this.$refs.myChart);
-    // 2.设置echarts数据
-    // 设置轴
     let xData = ["美食", "数码", "日化", "蔬菜"];
     let yData = [99, 67, 45, 87];
-    // 3.设置配置项
     let option = {
       title: {
         text: "主标题",
       },
       xAxis: {
-        //配置x轴的参数
-        data: xData,
-        type: "category", //坐标轴的类型，value 数据轴；category 类目轴
+        type: "value",
       },
       yAxis: {
-        //配置y轴的参数
+        data: xData,
+        type: "category",
       },
       series: [
-        //系列，配置图表的类型
         {
           name: "销量",
-          type: "bar", //系列类别
+          type: "bar",
           data: yData,
-          // 最大值、最小值
+          barWidth: 20, //设置柱条的宽度
+          // color: "red", //设置柱条的颜色
+          // 单独设置每个轴的颜色
+          itemStyle: {
+            normal: {
+              color: function (params) {
+                let colorList = ["#c23531", "#2f4554", "#61a0a8", "#91c7ae"];
+                return colorList[params.dataIndex];
+              },
+            },
+          },
           markPoint: {
             data: [
-              //标注的数据数组，每一项都是一个对象
               {
                 type: "max",
                 name: "最大值",
@@ -46,11 +49,10 @@ export default {
               },
             ],
           },
-          // 图表的标线
           markLine: {
             data: [
               {
-                type: "average", //平均值
+                type: "average",
                 name: "平均值",
               },
             ],
@@ -58,7 +60,6 @@ export default {
         },
       ],
     };
-    // 4.设置图表/绘制图表
     myEcharts.setOption(option);
   },
 };

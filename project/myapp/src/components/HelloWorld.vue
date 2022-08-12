@@ -6,6 +6,8 @@
       <li><router-link to="/about">About</router-link></li>
       <li><router-link to="/tooltip">tooltip</router-link></li>
       <li><router-link to="/legend">legend</router-link></li>
+      <li><router-link to="/barGraph">barGraph</router-link></li>
+      <li><router-link to="/horizontalBar">horizontalBar</router-link></li>
     </ul>
     <router-view></router-view>
   </div>
