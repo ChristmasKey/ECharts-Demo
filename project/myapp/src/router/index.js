@@ -6,6 +6,7 @@ import Tooltip from '@/views/Tooltip'
 import Legend from '@/views/Legend'
 import BarGraph from '@/views/BarGraph'
 import HorizontalBar from '@/views/HorizontalBar'
+import PieGraph from '@/views/PieGraph'
 
 export default new VueRouter({
     routes: [
@@ -32,6 +33,10 @@ export default new VueRouter({
         {
             path: '/horizontalBar',
             component: HorizontalBar
+        },
+        {
+            path: '/pieGraph',
+            component: PieGraph
         }
     ]
 })
