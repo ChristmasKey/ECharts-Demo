@@ -7,6 +7,9 @@ import Legend from '@/views/Legend'
 import BarGraph from '@/views/BarGraph'
 import HorizontalBar from '@/views/HorizontalBar'
 import PieGraph from '@/views/PieGraph'
+import LineGraph from '@/views/LineGraph'
+import MultiLineGraph from '@/views/MultiLineGraph'
+import ScatterGraph from '@/views/ScatterGraph'
 
 export default new VueRouter({
     routes: [
@@ -37,6 +40,18 @@ export default new VueRouter({
         {
             path: '/pieGraph',
             component: PieGraph
+        },
+        {
+            path: '/lineGraph',
+            component: LineGraph
+        },
+        {
+            path: '/multiLine',
+            component: MultiLineGraph
+        },
+        {
+            path: '/scatterGraph',
+            component: ScatterGraph
         }
     ]
 })

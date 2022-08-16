@@ -600,3 +600,349 @@ export default {
 </style>
 ```
 
+
+
+## 折线图
+
+==基本设置==
+
+```vue
+<template>
+  <div id="myDiv" ref="myChart"></div>
+</template>
+
+<script>
+import * as echarts from "echarts";
+
+export default {
+  mounted() {
+    let myEcharts = echarts.init(this.$refs.myChart);
+    // 设置数据
+    let xData = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    let data = [150, 230, 224, 218, 135, 147, 260];
+    // 配置项
+    let option = {
+      title: {
+        text: "周统计",
+      },
+      xAxis: {
+        type: "category",
+        data: xData,
+      },
+      yAxis: {
+        type: "value",
+      },
+      series: [
+        {
+          type: "line", //折线图
+          data,
+        },
+      ],
+    };
+    myEcharts.setOption(option);
+  },
+};
+</script>
+
+<style>
+#myDiv {
+  width: 500px;
+  height: 500px;
+  border: 1px solid red;
+}
+</style>
+```
+
+
+
+==更多设置==
+
+```vue
+<template>
+  <div id="myDiv" ref="myChart"></div>
+</template>
+
+<script>
+import * as echarts from "echarts";
+
+export default {
+  mounted() {
+    let myEcharts = echarts.init(this.$refs.myChart);
+    // 设置数据
+    let xData = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    let data = [150, 230, 224, 218, 135, 147, 260];
+    // 配置项
+    let option = {
+      title: {
+        text: "周统计",
+      },
+      xAxis: {
+        type: "category",
+        data: xData,
+      },
+      yAxis: {
+        type: "value",
+      },
+      series: [
+        {
+          type: "line", //折线图
+          data,
+          smooth: true, //开启平滑过渡
+          areaStyle: {}, //设置填充
+          markPoint: {
+            data: [
+              { type: "max", name: "最大值" },
+              { type: "min", name: "最小值" },
+            ],
+          },
+          markLine: {
+            data: [{ type: "average", name: "平均值" }],
+          },
+        },
+      ],
+    };
+    myEcharts.setOption(option);
+  },
+};
+</script>
+
+<style>
+#myDiv {
+  width: 500px;
+  height: 500px;
+  border: 1px solid red;
+}
+</style>
+```
+
+
+
+==堆叠效果==
+
+```vue
+<template>
+  <div id="myDiv" ref="myChart"></div>
+</template>
+
+<script>
+import * as echarts from "echarts";
+
+export default {
+  mounted() {
+    let myEcharts = echarts.init(this.$refs.myChart);
+    let xData = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    let dataA = [130, 125, 234, 164, 89, 188, 79];
+    let dataB = [77, 24, 85, 164, 89, 115, 120];
+    let dataC = [123, 225, 88, 46, 89, 90, 50];
+    let dataD = [20, 28, 200, 164, 180, 76, 100];
+    let option = {
+      xAxis: {
+        type: "category",
+        data: xData,
+      },
+      yAxis: {
+        type: "value",
+      },
+      legend: {},
+      tooltip: {},
+      series: [
+        {
+          name: "美食",
+          type: "line",
+          // 数据的堆叠
+          stack: "num", //同类型的数据需要匹配相同的stack属性值
+          data: dataA,
+          // 样式填充
+          areaStyle: {},
+        },
+        {
+          name: "日化",
+          type: "line",
+          // 数据的堆叠
+          stack: "num", //同类型的数据需要匹配相同的stack属性值
+          data: dataB,
+          // 样式填充
+          areaStyle: {},
+        },
+        {
+          name: "数码",
+          type: "line",
+          // 数据的堆叠
+          stack: "num", //同类型的数据需要匹配相同的stack属性值
+          data: dataC,
+          // 样式填充
+          areaStyle: {},
+        },
+
+        {
+          name: "蔬菜",
+          type: "line",
+          // 数据的堆叠
+          stack: "num", //同类型的数据需要匹配相同的stack属性值
+          data: dataD,
+          // 样式填充
+          areaStyle: {},
+          // 选中高亮状态
+          emphasis: {
+            focus: "series", //聚焦当前的区域高亮
+          },
+        },
+      ],
+    };
+    myEcharts.setOption(option);
+  },
+};
+</script>
+
+<style>
+    ...
+</style>
+```
+
+
+
+## 散点图
+
+==基本设置==
+
+```vue
+<template>
+  <div id="myDiv" ref="myChart"></div>
+</template>
+
+<script>
+import * as echarts from "echarts";
+
+export default {
+  mounted() {
+    let myEcharts = echarts.init(this.$refs.myChart);
+    let option = {
+      xAxis: {},
+      yAxis: {},
+      series: [
+        {
+          type: "scatter", //散点图
+          symbolSize: 15, //点大小
+          data: [
+            [10.0, 8.04],
+            [8.07, 6.95],
+            [13.0, 7.58],
+            [9.05, 8.81],
+            [11.0, 8.33],
+            [14.0, 7.66],
+            [13.4, 6.81],
+            [10.0, 6.33],
+            [14.0, 8.96],
+            [12.5, 6.82],
+            [9.15, 7.2],
+            [11.5, 7.2],
+            [3.03, 4.23],
+            [12.2, 7.83],
+            [2.02, 4.47],
+            [1.05, 3.33],
+            [4.05, 4.96],
+            [6.03, 7.24],
+            [12.0, 6.26],
+            [12.0, 8.84],
+            [7.08, 5.82],
+            [5.02, 5.68],
+          ],
+        },
+      ],
+    };
+    myEcharts.setOption(option);
+  },
+};
+</script>
+
+<style>
+</style>
+```
+
+
+
+==效果定制==
+
+```vue
+<template>
+  <div id="myDiv" ref="myChart"></div>
+</template>
+
+<script>
+import * as echarts from "echarts";
+
+export default {
+  mounted() {
+    let myEcharts = echarts.init(this.$refs.myChart);
+    let option = {
+      xAxis: {},
+      yAxis: {},
+      tooltip: {},
+      series: [
+        {
+          type: "scatter", //散点图
+          symbolSize: 20, //点大小
+          // 图形的样式
+          //color: 'red',
+          color: {
+            // 线性渐变
+            type: "linear",
+            // 相当于在图形包围盒中的百分比
+            x: 0,
+            y: 0,
+            x2: 1,
+            y2: 0,
+            colorStops: [
+              {
+                offset: 0,
+                color: "#00ccff",
+              },
+              {
+                offset: 1,
+                color: "rgba(255, 173, 2, 0.9)",
+              },
+            ],
+          },
+          // 高亮设置
+          emphasis: {
+            itemStyle: {
+              borderColor: "rgba(100, 200, 50, 0.5)",
+              borderWidth: 30,
+            },
+          },
+          data: [
+            [10.0, 8.04],
+            [8.07, 6.95],
+            [13.0, 7.58],
+            [9.05, 8.81],
+            [11.0, 8.33],
+            [14.0, 7.66],
+            [13.4, 6.81],
+            [10.0, 6.33],
+            [14.0, 8.96],
+            [12.5, 6.82],
+            [9.15, 7.2],
+            [11.5, 7.2],
+            [3.03, 4.23],
+            [12.2, 7.83],
+            [2.02, 4.47],
+            [1.05, 3.33],
+            [4.05, 4.96],
+            [6.03, 7.24],
+            [12.0, 6.26],
+            [12.0, 8.84],
+            [7.08, 5.82],
+            [5.02, 5.68],
+          ],
+        },
+      ],
+    };
+    myEcharts.setOption(option);
+  },
+};
+</script>
+
+<style>
+</style>
+```
+

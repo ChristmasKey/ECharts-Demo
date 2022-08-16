@@ -9,6 +9,9 @@
       <li><router-link to="/barGraph">barGraph</router-link></li>
       <li><router-link to="/horizontalBar">horizontalBar</router-link></li>
       <li><router-link to="/pieGraph">pieGraph</router-link></li>
+      <li><router-link to="/lineGraph">lineGraph</router-link></li>
+      <li><router-link to="/multiLine">multiLine</router-link></li>
+      <li><router-link to="/scatterGraph">scatterGraph</router-link></li>
     </ul>
     <router-view></router-view>
   </div>
