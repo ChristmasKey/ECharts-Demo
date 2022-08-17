@@ -12,6 +12,8 @@
       <li><router-link to="/lineGraph">lineGraph</router-link></li>
       <li><router-link to="/multiLine">multiLine</router-link></li>
       <li><router-link to="/scatterGraph">scatterGraph</router-link></li>
+      <li><router-link to="/grid">grid</router-link></li>
+      <li><router-link to="/kLine">kLine</router-link></li>
     </ul>
     <router-view></router-view>
   </div>

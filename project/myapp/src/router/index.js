@@ -10,6 +10,8 @@ import PieGraph from '@/views/PieGraph'
 import LineGraph from '@/views/LineGraph'
 import MultiLineGraph from '@/views/MultiLineGraph'
 import ScatterGraph from '@/views/ScatterGraph'
+import Grid from '@/views/Grid'
+import KLineGraph from '@/views/KLineGraph'
 
 export default new VueRouter({
     routes: [
@@ -52,6 +54,14 @@ export default new VueRouter({
         {
             path: '/scatterGraph',
             component: ScatterGraph
+        },
+        {
+            path: '/grid',
+            component: Grid
+        },
+        {
+            path: '/kLine',
+            component: KLineGraph
         }
     ]
 })

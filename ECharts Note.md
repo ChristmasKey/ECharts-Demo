@@ -209,7 +209,7 @@ export default {
 
 
 
-==legend配置项==
+==Legend配置项==
 
 ```vue
 <template>
@@ -261,6 +261,59 @@ export default {
     height: 500px;
     border: 1px solid red;
 }
+</style>
+```
+
+
+
+==Grid配置项==
+
+```vue
+<template>
+  <div id="myDiv" ref="myChart"></div>
+</template>
+
+<script>
+import * as echarts from "echarts";
+
+export default {
+  mounted() {
+    let myEcharts = echarts.init(this.$refs.myChart);
+    myEcharts.setOption({
+      title: {
+        text: "柱状统计图",
+      },
+      legend: {},
+      xAxis: {
+        type: "category",
+        data: ["美食", "数码", "日化", "蔬菜", "熟食"],
+      },
+      yAxis: {
+        type: "value",
+      },
+      // 网格相关设置
+      grid: {
+        left: "20%",
+        top: "20%",
+        right: "20%",
+        bottom: "20%",
+        show: true,
+        backgroundColor: "pink",
+        borderColor: "yellow",
+      },
+      series: [
+        {
+          name: "销量",
+          type: "bar",
+          data: [88, 75, 20, 210, 35],
+        },
+      ],
+    });
+  },
+};
+</script>
+
+<style>
 </style>
 ```
 
@@ -944,5 +997,55 @@ export default {
 
 <style>
 </style>
+```
+
+
+
+## K线图
+
+==基本设置==
+
+```vue
+<template>
+  <div id="myDiv" ref="myChart"></div>
+</template>
+
+<script>
+import * as echarts from "echarts";
+
+export default {
+  mounted() {
+    let myEcharts = echarts.init(this.$refs.myChart);
+    let option = {
+      xAxis: {
+        data: ["日化", "蔬菜", "电器", "美妆"],
+      },
+      yAxis: {},
+      series: [
+        {
+          type: "candlestick", //K线图
+          data: [
+            [20, 34, 10, 38],
+            [40, 35, 30, 50],
+            [31, 38, 33, 44],
+            [38, 15, 5, 42],
+          ],
+        },
+      ],
+    };
+    myEcharts.setOption(option);
+  },
+};
+</script>
+
+<style>
+</style>
+```
+
+
+
+==效果优化==
+
+```vue
 ```
 
