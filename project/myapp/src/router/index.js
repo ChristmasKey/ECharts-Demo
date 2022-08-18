@@ -16,9 +16,19 @@ import RadarGraph from '@/views/RadarGraph'
 import FunnelGraph from '@/views/FunnelGraph'
 import GaugeGraph from '@/views/GaugeGraph'
 import RelationGraph from '@/views/RelationGraph'
+import DataZoom from '@/views/DataZoom'
+import TreeGraph from '@/views/TreeGraph'
 
 export default new VueRouter({
     routes: [
+        {
+            path: '/tree',
+            component: TreeGraph
+        },
+        {
+            path: '/dataZoom',
+            component: DataZoom
+        },
         {
             path: '/relation',
             component: RelationGraph

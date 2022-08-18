@@ -18,6 +18,8 @@
       <li><router-link to="/funnel">funnel</router-link></li>
       <li><router-link to="/gauge">gauge</router-link></li>
       <li><router-link to="/relation">relation</router-link></li>
+      <li><router-link to="/dataZoom">数据缩放</router-link></li>
+      <li><router-link to="/tree">tree</router-link></li>
     </ul>
     <router-view></router-view>
   </div>
