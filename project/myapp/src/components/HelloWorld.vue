@@ -14,6 +14,10 @@
       <li><router-link to="/scatterGraph">scatterGraph</router-link></li>
       <li><router-link to="/grid">grid</router-link></li>
       <li><router-link to="/kLine">kLine</router-link></li>
+      <li><router-link to="/radar">radar</router-link></li>
+      <li><router-link to="/funnel">funnel</router-link></li>
+      <li><router-link to="/gauge">gauge</router-link></li>
+      <li><router-link to="/relation">relation</router-link></li>
     </ul>
     <router-view></router-view>
   </div>

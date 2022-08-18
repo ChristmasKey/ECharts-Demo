@@ -1139,5 +1139,436 @@ export default {
 ==基本设置==
 
 ```vue
+<template>
+  <div id="myDiv" ref="myChart"></div>
+</template>
+
+<script>
+import * as echarts from "echarts";
+
+export default {
+  mounted() {
+    let myEcharts = echarts.init(this.$refs.myChart);
+    let option = {
+      title: {
+        text: "雷达图",
+      },
+      //新属性radar，用于指定雷达图坐标系
+      radar: [
+        {
+          indicator: [
+            //雷达图的指示器，用来指定雷达图中的多个变量（维度）
+            { name: "蔬菜", max: 6500 },
+            { name: "水果", max: 16000 },
+            { name: "熟食", max: 30000 },
+            { name: "数码", max: 38000 },
+            { name: "家电", max: 52000 },
+            { name: "日化", max: 25000 },
+          ],
+          shape: 'circle'
+        },
+      ],
+      series: [
+        {
+          type: "radar",
+          data: [
+            {
+              value: [4200, 8300, 16666, 22345, 31234, 14567],
+            },
+          ],
+        },
+      ],
+    };
+    myEcharts.setOption(option);
+  },
+};
+</script>
+
+<style>
+</style>
 ```
+
+
+
+==效果提升==
+
+```vue
+<template>
+  <div id="myDiv" ref="myChart"></div>
+</template>
+
+<script>
+import * as echarts from "echarts";
+
+export default {
+  mounted() {
+    let myEcharts = echarts.init(this.$refs.myChart);
+    let option = {
+      title: {
+        text: "雷达图",
+      },
+      //新属性radar，用于指定雷达图坐标系
+      radar: [
+        {
+          indicator: [
+            //雷达图的指示器，用来指定雷达图中的多个变量（维度）
+            { name: "蔬菜", max: 6500 },
+            { name: "水果", max: 16000 },
+            { name: "熟食", max: 30000 },
+            { name: "数码", max: 38000 },
+            { name: "家电", max: 52000 },
+            { name: "日化", max: 25000 },
+          ],
+          shape: "circle", //设置雷达图的形状
+          radius: 200, //设置雷达图的半径
+          startAngle: 180, //设置坐标系的起使角度（顺时针）
+          splitNumber: 7, //设置指示器轴的分割端数
+          //雷达图每个指示器名称的配置项
+          axisName: {
+            //格式
+            formatter: "【{value}】",
+            //颜色
+            color: "#428BD4",
+          },
+          //配置分割区域效果
+          splitArea: {
+            //设置样式
+            areaStyle: {
+              //颜色
+              color: [
+                "#FF0000",
+                "#FF7F00",
+                "#FFFF00",
+                "#00FF00",
+                "#00FFFF",
+                "#0000FF",
+                "#8B00FF",
+              ],
+              //阴影色
+              shadowColor: "rgba(0,0,0,0.9)",
+              shadowBlur: 10,
+            },
+          },
+        },
+      ],
+      series: [
+        {
+          type: "radar",
+          data: [
+            {
+              value: [4200, 8300, 16666, 22345, 31234, 14567],
+              areaStyle: {
+                color: 'black'
+              }
+            },
+          ],
+          //设置线条样式
+          lineStyle: {
+            type: 'dashed'
+          }
+        },
+      ],
+    };
+    myEcharts.setOption(option);
+  },
+};
+</script>
+
+<style>
+</style>
+```
+
+
+
+## 漏斗图
+
+==基本设置==
+
+```vue
+<template>
+  <div id="myDiv" ref="myChart"></div>
+</template>
+
+<script>
+import * as echarts from "echarts";
+
+export default {
+  mounted() {
+    let myEcharts = echarts.init(this.$refs.myChart);
+    let option = {
+      title: {
+        text: "漏斗图",
+      },
+      tooltip: {
+        trigger: "item",
+        formatter: "{a}<br/>{b}:{c}%",
+      },
+      series: [
+        {
+          name: "ABA",
+          type: "funnel",
+          data: [
+            { value: 60, name: "美食" },
+            { value: 40, name: "日化" },
+            { value: 20, name: "数码" },
+            { value: 80, name: "家电" },
+            { value: 100, name: "蔬菜" },
+          ],
+          left: "10%",
+        },
+      ],
+    };
+    myEcharts.setOption(option);
+  },
+};
+</script>
+
+<style>
+</style>
+```
+
+
+
+==样式设置==
+
+```vue
+<template>
+  <div id="myDiv" ref="myChart"></div>
+</template>
+
+<script>
+import * as echarts from "echarts";
+
+export default {
+  mounted() {
+    let myEcharts = echarts.init(this.$refs.myChart);
+    let option = {
+      title: {
+        text: "漏斗图",
+      },
+      tooltip: {
+        trigger: "item",
+        formatter: "{a}<br/>{b}:{c}%",
+      },
+      series: [
+        {
+          name: "ABA",
+          type: "funnel",
+          data: [
+            { value: 60, name: "美食" },
+            { value: 40, name: "日化" },
+            { value: 20, name: "数码" },
+            { value: 80, name: "家电" },
+            { value: 100, name: "蔬菜" },
+          ],
+          left: "10%",
+          sort: "ascending", //排序 ascending descending none
+          //设置图形样式
+          itemStyle: {
+            borderColor: "red",
+            borderWidth: "2",
+          },
+          //设置文字标签
+          label: {
+            show: true,
+            position: "inside",
+          },
+          //设置高亮
+          emphasis: {
+            label: {
+              fontSize: 30,
+            },
+          },
+        },
+      ],
+    };
+    myEcharts.setOption(option);
+  },
+};
+</script>
+
+<style>
+</style>
+```
+
+
+
+## 仪表盘
+
+```vue
+<template>
+  <div id="myDiv" ref="myChart"></div>
+</template>
+
+<script>
+import * as echarts from "echarts";
+
+export default {
+  mounted() {
+    let myEcharts = echarts.init(this.$refs.myChart);
+    let option = {
+      title: {
+        text: "仪表盘",
+      },
+      series: [
+        {
+          type: "gauge",
+          data: [
+            {
+              value: "45",
+              name: "提示信息",
+              detail: {
+                //开启数字动画
+                valueAnimation: true,
+              },
+            },
+          ],
+          //进度条配置
+          progress: {
+            show: true, //开启显示
+          },
+        },
+      ],
+    };
+    myEcharts.setOption(option);
+  },
+};
+</script>
+
+<style>
+</style>
+```
+
+
+
+## 关系图
+
+```vue
+<template>
+  <div id="myDiv" ref="myChart"></div>
+</template>
+
+<script>
+import * as echarts from "echarts";
+
+export default {
+  data() {
+    return {
+      list: [
+        //创建关系图的节点数据
+        {
+          name: "韦小宝",
+          id: "1",
+          symbolSize: 30,
+        },
+        {
+          name: "方怡",
+          id: "2",
+          symbolSize: 30,
+        },
+        {
+          name: "双儿",
+          id: "3",
+          symbolSize: 30,
+        },
+        {
+          name: "茅十八",
+          id: "4",
+          symbolSize: 30,
+        },
+        {
+          name: "五六七",
+          id: "5",
+          symbolSize: 30,
+        },
+      ],
+      num: [
+        //创建关系图的关系数据
+        {
+          source: "1", //边的源节点名称
+          target: "2", //目标节点名称
+          relation: {
+            name: "老婆",
+            id: "1",
+          },
+        },
+        {
+          source: "1",
+          target: "4",
+          relation: {
+            name: "兄弟",
+            id: "1",
+          },
+        },
+        {
+          source: "4",
+          target: "1",
+          relation: {
+            name: "兄弟",
+            id: "1",
+          },
+        },
+        {
+          source: "3",
+          target: "5",
+          relation: {
+            name: "义妹",
+            id: "1",
+          },
+        },
+      ],
+    };
+  },
+  mounted() {
+    let myEcharts = echarts.init(this.$refs.myChart);
+    let option = {
+      title: {
+        text: "关系图",
+      },
+      series: [
+        {
+          type: "graph", //关系图
+          data: this.list,
+          layout: "force", //力引导布局
+          itemStyle: {
+            color: "#95dcb2",
+          },
+          label: {
+            //图形上的文字
+            show: true,
+            position: "bottom",
+            distance: 6, //距离图形的位置
+            fontSize: 16,
+            align: "center",
+          },
+          //力引导布局相关的配置项
+          force: {
+            repulsion: 100, //斥力因子
+            gravity: 0.01, //引力因子
+            edgeLength: 200, //边的两个节点之间的距离
+          },
+          links: this.num,
+          edgeLabel: {
+            show: true, //显示标签
+            position: "middle", //标签位置
+            //设置标签格式
+            formatter: (params) => {
+              return params.data.relation.name;
+            },
+          },
+        },
+      ],
+    };
+    myEcharts.setOption(option);
+  },
+};
+</script>
+
+<style>
+</style>
+```
+
+
+
+## 区域缩放
 

@@ -12,9 +12,30 @@ import MultiLineGraph from '@/views/MultiLineGraph'
 import ScatterGraph from '@/views/ScatterGraph'
 import Grid from '@/views/Grid'
 import KLineGraph from '@/views/KLineGraph'
+import RadarGraph from '@/views/RadarGraph'
+import FunnelGraph from '@/views/FunnelGraph'
+import GaugeGraph from '@/views/GaugeGraph'
+import RelationGraph from '@/views/RelationGraph'
 
 export default new VueRouter({
     routes: [
+        {
+            path: '/relation',
+            component: RelationGraph
+        },
+        {
+            path: '/gauge',
+            component: GaugeGraph
+        },
+        {
+            path: '/funnel',
+            component: FunnelGraph
+        },
+        {
+            path: '/radar',
+            component: RadarGraph
+        },
+
         {
             path: '/about',
             component: About
