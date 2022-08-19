@@ -18,9 +18,24 @@ import GaugeGraph from '@/views/GaugeGraph'
 import RelationGraph from '@/views/RelationGraph'
 import DataZoom from '@/views/DataZoom'
 import TreeGraph from '@/views/TreeGraph'
+import DataSort from "@/views/DataSort";
+import InstalledTheme from "@/views/InstalledTheme";
+import ChinaGraph from "@/views/ChinaGraph";
 
 export default new VueRouter({
     routes: [
+        {
+            path: '/chinaMap',
+            component: ChinaGraph
+        },
+        {
+            path: '/installed',
+            component: InstalledTheme
+        },
+        {
+            path: '/dataSort',
+            component: DataSort
+        },
         {
             path: '/tree',
             component: TreeGraph

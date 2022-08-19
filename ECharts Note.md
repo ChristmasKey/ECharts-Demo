@@ -1755,3 +1755,285 @@ export default {
 </style>
 ```
 
+
+
+==方向切换==
+
+```vue
+<template>
+  <div id="myDiv" ref="myChart"></div>
+</template>
+
+<script>
+import * as echarts from "echarts";
+
+export default {
+  data() {
+    return {
+      list: {
+        //最外层的数据就是数据的根节点
+        name: "根节点", //名字
+        children: [
+          {
+            name: "层级2",
+            children: [
+              {
+                name: "层级3-1",
+                children: [
+                  {
+                    name: "数据1",
+                    value: 2345,
+                  },
+                  {
+                    name: "数据2",
+                    value: 3212,
+                  },
+                  {
+                    name: "数据3",
+                    value: 2464,
+                  },
+                  {
+                    name: "数据4",
+                    value: 2467,
+                  },
+                ],
+              },
+              {
+                name: "层级3-2",
+                children: [
+                  { name: "数据1", value: 2345 },
+                  { name: "数据2", value: 3212 },
+                  { name: "数据3", value: 2464 },
+                  { name: "数据4", value: 2467 },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    };
+  },
+  mounted() {
+    let myEcharts = echarts.init(this.$refs.myChart);
+    let option = {
+      title: {
+        text: "基本树形图",
+      },
+      tooltip: {
+        trigger: "item",
+      },
+      series: [
+        {
+          type: "tree",
+          data: [this.list],
+          symbolSize: 15, //设置节点大小
+          //配置布局方向
+          orient: 'BT',
+          //配置节点标签
+          label: {
+            rotate: 90, //设置标签旋转
+            //设置标签位置居左
+            position: "left",
+            verticalAlign: "middle",
+            fontSize: 10,
+          },
+          //配置叶子节点
+          leaves: {
+            //配置标签
+            label: {
+              position: "right",
+              verticalAlign: "middle",
+            },
+          },
+          // 配置高亮样式
+          emphasis: {
+            focus: "descendant", //聚焦于所有子孙节点
+          },
+        },
+      ],
+    };
+    myEcharts.setOption(option);
+  },
+};
+</script>
+
+<style>
+#myDiv {
+  width: 500px;
+  height: 500px;
+  border: 1px solid red;
+}
+</style>
+```
+
+
+
+## 数据排序
+
+```vue
+<template>
+    <div id="myDiv" ref="myChart"></div>
+</template>
+
+<script>
+    import * as echarts from 'echarts'
+
+    export default {
+        name: "DataSort",
+        mounted() {
+            let myEcharts = echarts.init(this.$refs.myChart)
+            let option = {
+                //使用数据集管理数据
+                dataset: [
+                    {
+                        //数据的分类
+                        dimensions: ["类别", "数量",],
+                        //分类数据
+                        source: [
+                            ["美食", 123],
+                            ["日化", 98],
+                            ["熟食", 231],
+                            ["数码", 223],
+                            ["蔬菜", 23],
+                            ["杂项", 263],
+                        ],
+                    },
+                    {
+                        transform: {
+                            type: 'sort',
+                            config: {
+                                dimension: '数量',
+                                order: 'desc'
+                            }
+                        }
+                    }],
+                title: {
+                    text: '数据排序'
+                },
+                xAxis: {
+                    type: 'category',
+                    //坐标轴刻度标签相关配置
+                    axisLabel: {
+                        //坐标轴刻度标签的显示间隔，在类目轴中有效
+                        interval: 0,
+                        //刻度标签旋转的角度，在类目轴的类目标签显示不下的时候可以通过旋转防止标签之间重叠
+                        rotate: 30
+                    }
+                },
+                yAxis: {},
+                series: [
+                    {
+                        type: 'bar',
+                        encode: {
+                            x: '类别',
+                            y: '数量',
+                        },
+                        datasetIndex: 1
+                    }
+                ]
+            }
+            myEcharts.setOption(option)
+        }
+    }
+</script>
+
+<style scoped>
+
+</style>
+```
+
+
+
+## 内置主题
+
+```vue
+<template>
+    <div id="myDiv" ref="myChart"></div>
+</template>
+
+<script>
+    import * as echarts from 'echarts'
+
+    export default {
+        name: "InstalledTheme",
+        mounted() {
+            //echarts的init方法的第二个参数可以指定内置主题：light、dark
+            let myEcharts = echarts.init(this.$refs.myChart, "dark")
+            let xData = ['美食', '数码', '日化', '蔬菜', '熟食']
+            let yData = [88, 75, 20, 210, 35]
+            let option = {
+                title: {
+                    text: '内置主题'
+                },
+                xAxis: {
+                    type: 'category',
+                    data: xData
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [
+                    {
+                        name: '销量',
+                        type: 'bar',
+                        data: yData
+                    }
+                ]
+            }
+            myEcharts.setOption(option)
+        }
+    }
+</script>
+
+<style scoped>
+
+</style>
+```
+
+
+
+## 地图
+
+### 中国地图
+
+下载地图的json数据：https://datav.aliyun.com/portal/school/atlas/area_selector
+
+```vue
+<template>
+    <div id="myDiv" ref="myChart"></div>
+</template>
+
+<script>
+    import * as echarts from 'echarts'
+    import {mapData} from "@/assets/mapData";
+
+    export default {
+        name: "ChinaGraph",
+        mounted() {
+            let myEcharts = echarts.init(this.$refs.myChart)
+            //注册当前使用的地图名
+            echarts.registerMap("chinaMap", mapData)
+            let option = {
+                geo: {//地理坐标组件
+                    type: 'map',
+                    map: 'chinaMap',
+                    roam: true, //开启平移缩放
+                    zoom: 5,//设置地图初始缩放等级
+                    center: [116.404188, 39.914687],//设置地图初始中心的地理坐标
+                    //使用百度地图的坐标拾取器获取地理坐标
+                }
+            }
+            myEcharts.setOption(option)
+        }
+    }
+</script>
+
+<style scoped>
+
+</style>
+```
+
+
+
+### 省份地图
+

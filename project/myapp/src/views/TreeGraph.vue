@@ -39,10 +39,10 @@ export default {
               {
                 name: "层级3-2",
                 children: [
-                  { name: "", value: 2345 },
-                  { name: "", value: 3212 },
-                  { name: "", value: 2464 },
-                  { name: "", value: 2467 },
+                  { name: "数据1", value: 2345 },
+                  { name: "数据2", value: 3212 },
+                  { name: "数据3", value: 2464 },
+                  { name: "数据4", value: 2467 },
                 ],
               },
             ],
@@ -65,8 +65,11 @@ export default {
           type: "tree",
           data: [this.list],
           symbolSize: 15, //设置节点大小
+          //配置布局方向
+          orient: 'BT',
           //配置节点标签
           label: {
+            rotate: 90, //设置标签旋转
             //设置标签位置居左
             position: "left",
             verticalAlign: "middle",

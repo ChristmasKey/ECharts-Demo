@@ -20,6 +20,9 @@
       <li><router-link to="/relation">relation</router-link></li>
       <li><router-link to="/dataZoom">数据缩放</router-link></li>
       <li><router-link to="/tree">tree</router-link></li>
+      <li><router-link to="/dataSort">数据排序</router-link></li>
+      <li><router-link to="/installed">内置主题</router-link></li>
+      <li><router-link to="/chinaMap">中国地图</router-link></li>
     </ul>
     <router-view></router-view>
   </div>
