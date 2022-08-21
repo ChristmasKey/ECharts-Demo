@@ -2035,5 +2035,383 @@ export default {
 
 
 
+==地图标记设置与效果==
+
+```vue
+<template>
+    <div id="myDiv" ref="myChart"></div>
+</template>
+
+<script>
+    import * as echarts from 'echarts'
+    import {mapData} from "@/assets/mapData";
+
+    export default {
+        name: "ChinaGraph",
+        mounted() {
+            let myEcharts = echarts.init(this.$refs.myChart)
+            //注册当前使用的地图名
+            echarts.registerMap("chinaMap", mapData)
+            let option = {
+                geo: {//地理坐标组件
+                    type: 'map',
+                    map: 'chinaMap',
+                    roam: true, //开启平移缩放
+                    zoom: 5,//设置地图初始缩放等级
+                    center: [116.404188, 39.914687],//设置地图初始中心的地理坐标
+                },
+                series: [
+                    {
+                        type: 'scatter', //散点图
+                        data: [
+                            {name: '北京市', value: [116.46, 39.92, 4000]}
+                        ],
+                        //指定坐标系类型为 地理坐标系
+                        coordinateSystem: 'geo',
+                        symbolSize: 30, //设置标记大小
+                        // label: {
+                        //     show: true
+                        // }
+                    },
+                    {
+                        type: "effectScatter", // 带有涟漪特效动画的散点（气泡）图
+                        coordinateSystem: 'geo',
+                        data: [
+                            {name: '西安市', value: [108.95, 34.26]}
+                        ],
+                        //设置涟漪效果的相关配置
+                        rippleEffect: {
+                            number: 2, //波纹数量
+                            scale: 4, //波纹最大缩放比例
+                        },
+                        itemStyle: {
+                            color: 'red'
+                        }
+                    }
+                ]
+            }
+            myEcharts.setOption(option)
+        }
+    }
+</script>
+
+<style scoped>
+
+</style>
+```
+
+
+
 ### 省份地图
 
+```vue
+<template>
+    <div id="myDiv" ref="myChart"></div>
+</template>
+
+<script>
+    import * as echarts from 'echarts'
+    import {jsMap} from "@/assets/jiangsuMap";
+
+    export default {
+        name: "JiangSuMap",
+        mounted() {
+            let myEcharts = echarts.init(this.$refs.myChart)
+            echarts.registerMap('jiangsuMap', jsMap)
+            let option = {
+                geo: {
+                    type: 'map',
+                    map: 'jiangsuMap',
+                    roam: true,
+                    //地图标签相关设置
+                    label: {
+                        show: true,
+                        color: 'blue',
+                        fontSize: 10
+                    },
+                    //地图区域的多边形 图形样式
+                    itemStyle: {
+                        areaColor: 'orange'
+                    }
+                }
+            }
+            myEcharts.setOption(option)
+        }
+    }
+</script>
+
+<style scoped>
+
+</style>
+```
+
+
+
+## 图标自适应大小
+
+```vue
+<template>
+    <div id="myDiv" ref="myChart"></div>
+</template>
+
+<script>
+    import * as echarts from 'echarts'
+
+    export default {
+        name: "AutoSize",
+        mounted() {
+            let myEcharts = echarts.init(this.$refs.myChart)
+            let xData = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+            let option = {
+                title: {
+                    text: '图表自适应大小'
+                },
+                xAxis: {
+                    type: 'category',
+                    data: xData,
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [
+                    {
+                        name: '美食',
+                        type: 'line',
+                        data: [120, 132, 101, 134, 90, 230, 210],
+                        stack: 'num',
+                        areaStyle: {},
+                        emphasis: {
+                            focus: 'series'
+                        }
+                    },
+                    {
+                        name: '日化',
+                        type: 'line',
+                        stack: 'num',
+                        data: [220, 182, 191, 234, 290, 330, 310],
+                        areaStyle: {},
+                        emphasis: {
+                            focus: 'series'
+                        }
+                    },
+                    {
+                        name: '熟食',
+                        type: 'line',
+                        stack: 'num',
+                        data: [150, 232, 201, 154, 190, 330, 410],
+                        areaStyle: {},
+                        emphasis: {
+                            focus: 'series'
+                        }
+                    },
+                ]
+            }
+            myEcharts.setOption(option)
+
+            //监听页面大小的改变
+            window.addEventListener("resize", () => {
+                console.log('浏览器的大小改变了')
+                myEcharts.resize()
+            })
+        }
+    }
+</script>
+
+<style scoped>
+    #myDiv {
+        width: 100%;
+        height: 500px;
+        border: 1px solid red;
+    }
+</style>
+```
+
+
+
+## 加载动画效果
+
+安装数据模拟工具`json-server`：npm install -g json-server
+
+安装`axios`包：npm install --save axios
+
+```vue
+<template>
+    <div id="myDiv" ref="myChart"></div>
+</template>
+
+<script>
+    import * as echarts from 'echarts'
+    import axios from 'axios'
+
+    export default {
+        /*
+        1、全局下载 npm install -g json-server
+        2、新建文件夹 mock 与文件 data.json 用来模拟数据
+        3、（在mock目录下）启动json-server：json-server --watch data.json --port 8888
+         */
+        name: "LoadingAnimate",
+        data() {
+            return {
+                eData: []
+            }
+        },
+        methods: {
+            async linkData() {
+                let echartsData = await axios({
+                    url: 'http://localhost:8888/one'
+                })
+                this.eData = echartsData.data
+            }
+        },
+        mounted() {
+            let myEcharts = echarts.init(this.$refs.myChart)
+            //开始等待
+            myEcharts.showLoading()
+            this.linkData().then(() => {
+                //结束等待
+                myEcharts.hideLoading()
+                let option = {
+                    title: {
+                        text: "加载动画",
+                        subtext: '基本设置',
+                        left: 'center'
+                    },
+                    tooltip: {
+                        trigger: 'item'
+                    },
+                    legend: {
+                        orient: 'vertical',
+                        left: "left"
+                    },
+                    series: [
+                        {
+                            name: '销售量',
+                            type: 'pie',
+                            radius: ['40%', '70%'],
+                            label: {
+                                show: true,
+                                position: 'inside',
+                                color: 'yellow'
+                            },
+                            labelLine: {
+                                show: false
+                            },
+                            roseType: 'area',
+                            itemStyle: {
+                                color: '#c23531',
+                                shadowBlur: 200,
+                                shadowColor: 'rgba(0,0,0,0.5)'
+                            },
+                            data: this.eData,
+                        }
+                    ]
+                }
+                myEcharts.setOption(option)
+            })
+        }
+    }
+</script>
+
+<style scoped>
+
+</style>
+```
+
+data.json
+
+```json
+{
+  "one": [
+    {
+      "value": 67,
+      "name": "美食",
+      "itemStyle": {
+        "normal": {
+          "color": "rgb(1,175,80)"
+        }
+      }
+    },
+    {
+      "value": 85,
+      "name": "日化",
+      "itemStyle": {
+        "normal": {
+          "color": "rgb(255,175,80)"
+        }
+      }
+    },
+    {
+      "value": 45,
+      "name": "数码",
+      "itemStyle": {
+        "normal": {
+          "color": "rgb(30,50,70)"
+        }
+      }
+    },
+    {
+      "value": 98,
+      "name": "家电",
+      "itemStyle": {
+        "normal": {
+          "color": "rgb(30,50,70)"
+        }
+      }
+    }
+  ]
+}
+```
+
+
+
+## 动画配置
+
+```vue
+<template>
+    <div id="myDiv" ref="myChart"></div>
+</template>
+
+<script>
+    import * as echarts from 'echarts'
+
+    export default {
+        name: "AnimateConfig",
+        mounted() {
+            let myEcharts = echarts.init(this.$refs.myChart)
+            let xData = ["美食", "数码", "日化", "蔬菜", "熟食"]
+            let yData = [88, 75, 20, 210, 35]
+            let option = {
+                animation: true, //是否开启动画
+                animationThreshold: 5, //开启动画的阈值
+                animationDuration: 5000, //初始动画的时长，支持回调函数
+                animationDelay: 2000, //初始动画的延迟，支持回调函数
+                animationEasing: "linear", //初始动画的缓动效果
+                xAxis: {
+                    type: 'value'
+                },
+                yAxis: {
+                    type: 'category',
+                    data: xData
+                },
+                series: [
+                    {
+                        type: 'bar',
+                        name: '销量',
+                        data: yData,
+                        barWidth: 50
+                    }
+                ]
+            }
+            myEcharts.setOption(option)
+        }
+    }
+</script>
+
+<style scoped>
+
+</style>
+```
+
+
+
+## 事件

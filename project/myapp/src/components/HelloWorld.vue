@@ -23,6 +23,10 @@
       <li><router-link to="/dataSort">数据排序</router-link></li>
       <li><router-link to="/installed">内置主题</router-link></li>
       <li><router-link to="/chinaMap">中国地图</router-link></li>
+      <li><router-link to="/jiangsuMap">江苏地图</router-link></li>
+      <li><router-link to="/autoSize">图表自适应大小</router-link></li>
+      <li><router-link to="/loading">加载动画</router-link></li>
+      <li><router-link to="/animateConfig">动画配置</router-link></li>
     </ul>
     <router-view></router-view>
   </div>

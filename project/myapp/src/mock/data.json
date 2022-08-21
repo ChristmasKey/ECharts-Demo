@@ -1,0 +1,40 @@
+{
+  "one": [
+    {
+      "value": 67,
+      "name": "美食",
+      "itemStyle": {
+        "normal": {
+          "color": "rgb(1,175,80)"
+        }
+      }
+    },
+    {
+      "value": 85,
+      "name": "日化",
+      "itemStyle": {
+        "normal": {
+          "color": "rgb(255,175,80)"
+        }
+      }
+    },
+    {
+      "value": 45,
+      "name": "数码",
+      "itemStyle": {
+        "normal": {
+          "color": "rgb(30,50,70)"
+        }
+      }
+    },
+    {
+      "value": 98,
+      "name": "家电",
+      "itemStyle": {
+        "normal": {
+          "color": "rgb(30,50,70)"
+        }
+      }
+    }
+  ]
+}

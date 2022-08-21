@@ -21,9 +21,29 @@ import TreeGraph from '@/views/TreeGraph'
 import DataSort from "@/views/DataSort";
 import InstalledTheme from "@/views/InstalledTheme";
 import ChinaGraph from "@/views/ChinaGraph";
+import JiangSuMap from "@/views/JiangSuMap";
+import AutoSize from "@/views/AutoSize";
+import LoadingAnimate from "@/views/LoadingAnimate";
+import AnimateConfig from "@/views/AnimateConfig";
 
 export default new VueRouter({
     routes: [
+        {
+            path: "/animateConfig",
+            component: AnimateConfig
+        },
+        {
+            path: '/loading',
+            component: LoadingAnimate
+        },
+        {
+            path: '/autoSize',
+            component: AutoSize
+        },
+        {
+            path: '/jiangsuMap',
+            component: JiangSuMap
+        },
         {
             path: '/chinaMap',
             component: ChinaGraph
