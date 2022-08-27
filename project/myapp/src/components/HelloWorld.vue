@@ -27,6 +27,7 @@
       <li><router-link to="/autoSize">图表自适应大小</router-link></li>
       <li><router-link to="/loading">加载动画</router-link></li>
       <li><router-link to="/animateConfig">动画配置</router-link></li>
+      <li><router-link to="/events">echarts事件</router-link></li>
     </ul>
     <router-view></router-view>
   </div>

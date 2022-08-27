@@ -25,9 +25,14 @@ import JiangSuMap from "@/views/JiangSuMap";
 import AutoSize from "@/views/AutoSize";
 import LoadingAnimate from "@/views/LoadingAnimate";
 import AnimateConfig from "@/views/AnimateConfig";
+import Events from "@/views/Events";
 
 export default new VueRouter({
     routes: [
+        {
+            path: '/events',
+            component: Events
+        },
         {
             path: "/animateConfig",
             component: AnimateConfig
