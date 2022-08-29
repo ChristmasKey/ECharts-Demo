@@ -3,14 +3,18 @@
 </template>
 
 <script>
+    import axios from 'axios'
     import {provide} from 'vue'
     import * as echarts from 'echarts'
 
+    //设置基准路径
+    axios.defaults.baseURL = "http://localhost:3000"
     export default {
         setup() {
             //param1：名字
             //param2：传递内容
             provide("echarts", echarts)
+            provide("axios", axios)
         }
     }
 </script>

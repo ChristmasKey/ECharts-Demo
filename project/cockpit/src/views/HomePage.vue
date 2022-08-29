@@ -50,6 +50,8 @@
         setup() {
             let $echarts = inject("echarts")
             console.log("测试使用echarts", $echarts)
+            let $http = inject("axios")
+            console.log("测试使用axios", $http)
         }
     }
 </script>
