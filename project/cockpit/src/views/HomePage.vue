@@ -16,7 +16,9 @@
                 </ItemPage>
             </section>
             <!--中容器-->
-            <section class="itemCenter"></section>
+            <section class="itemCenter">
+                <MapPage/>
+            </section>
             <!--右容器-->
             <section class="itemRight">
                 <ItemPage>
@@ -37,10 +39,12 @@
     import ChartRT from "@/components/ChartRT";
     import ChartRB from "@/components/ChartRB";
     import {inject} from "vue"
+    import MapPage from "@/components/MapPage";
 
     export default {
         name: "HomePage",
         components: {
+            MapPage,
             ChartRB,
             ChartRT,
             ChartLB,
